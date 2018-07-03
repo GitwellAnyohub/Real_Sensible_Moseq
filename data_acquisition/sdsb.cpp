@@ -1,5 +1,12 @@
 //(s)tream (d)epth (s)ave (b)inary
 
+// to execute code type following in terminal: (don't include the dollar sign)
+// $ g++ -std=c++11 sdsb.cpp -lrealsense2
+// this generates an a.out file and you can run that by typing:
+// $ ./a.out
+// you should now see a file called depthdata.bin 
+// to stop script hit ctrl + c ("control" and "c" at the same time)
+
 #include <librealsense2/rs.hpp> // Include RealSense Cross Platform API
 
 #include <fstream>
@@ -29,6 +36,9 @@ bool save_frame_raw_data(const std::string& filename, rs2::frame frame)
 //main function which runs until I press ctrl c (for now)
 int main(int argc, char * argv[]) try
 {
+
+    std::ofstream timestamps;
+    timestamps.open("depth_ts.txt");
     rs2::colorizer color_map;
     
     auto depth_units = rs2::context().query_devices().front()
@@ -52,6 +62,7 @@ int main(int argc, char * argv[]) try
         rs2::frameset data = pipe.wait_for_frames(); // Wait for next set of frames from the camera
 	rs2::frame depth = data.get_depth_frame(); // Find and colorize the depth data
         save_frame_raw_data("depthdata.bin", depth); //save frame as binary array into file called "depthdata.bin"
+        timestamps << std::to_string(depth.get_timestamp()) << std::endl; //timestamp (converted from float to string and new line
     }
 
     return EXIT_SUCCESS;
