@@ -1,0 +1,46 @@
+crop_size:
+- 106
+- 106
+bg_roi_dilate:
+- 70
+- 70
+bg_roi_shape: ellipse
+bg_roi_index: 0
+bg_roi_weights:
+- 1
+- 0.1
+- 1
+min_height: 40
+max_height: 400
+fps: 90
+flip_classifier:
+use_tracking_model: false
+cable_filter_iters: 0
+cable_filter_shape: rectangle
+cable_filter_size:
+- 5
+- 5
+tail_filter_iters: 1
+tail_filter_size:
+- 15
+- 15
+tail_filter_shape: rect
+spatial_filter_size:
+- 13
+temporal_filter_size:
+- 0
+chunk_size: 1500
+chunk_overlap: 0
+output_dir: proc
+write_movie: true
+resolution:
+- 640
+- 480
+floor_range: # alternative is 800-1800
+- 2400
+- 2800
+noise_tolerance: 250
+frame_stride: 500
+cmap: magma
+use_plane_bground: false
+config_file:
