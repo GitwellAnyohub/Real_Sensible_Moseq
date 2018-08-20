@@ -1,0 +1,39 @@
+Device firmware update:
+* you can update realsense firmware both on linux or windows:
+    * linux
+    * user guide for windows
+
+For Linux, You can copy and paste the following commands (step by step) into the terminal:
+
+To update firmware on linux, enter these commands one by one into the terminal. 
+FIRST make sure your D400 camera is NOT plugged in.
+
+$ echo 'deb http://realsense-hw-public.s3.amazonaws.com/Debian/apt-repo xenial main' | sudo tee /etc/apt/sources.list.d/realsense-public.list
+
+$ sudo apt-key adv --keyserver keys.gnupg.net --recv-key 6F3EFCDE
+
+$ sudo apt-get update
+
+$ sudo apt-get install intel-realsense-dfu*
+
+#Now, download binary file for firmware from https://downloadcenter.intel.com/download/27522/Latest-Firmware-for-Intel-RealSense-D400-Product-Family?v=t and place binary file into current working directory (file will be called  Signed_image_UVC_[some version].bin and you may need to unzip it first For me the version was 5_9_14_0
+
+$ unzip Intel®\ RealSense™D400\ Series\ Signed\ Developer\ Firmware\ v5_9_14.zip  
+
+$ lsusb
+
+#NOW plus in camera directly to computer (don’t use usb hub) and type lsusb to find the bus number (for me it was 004) and device number (for me it was 003) of the Intel Corp. device (for my D415 it was ID 8086:0ad3 Intel Corp. )
+
+$ intel-realsense-dfu -b 003 -d 007 -f -i Signed_Image_UVC_5_9_14_0.bin
+
+#make sure you enter whatever version is correct (so you may need to change the 5_9_11_0 to something else)
+
+#check firmware with following commands
+
+$ intel-realsense-dfu -p
+
+#if the update didn't work with the following error:
+
+ "Error: Enumerate failed. Camera not connected! pid=adc"
+
+#then try unplugging the camera from the usb port (unplug from the computer NOT the camera) and replugging to a different usb 3 port or the same one. Not the bus number and device number will change when you do lsusb and you'll have to update the "$intel-realsense-dfu" command
