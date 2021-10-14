@@ -20,7 +20,7 @@ brew install homebrew/core/glfw3
 brew install cmake
 brew install librealsense
 
-#all of these things should now be visible in /usr/local/lib 
+#all of these things should now be visible in /usr/local/lib or usr/local/Cellar (wherever brew puts stuff for you)
 #after brew installing librealsense you should be able to immediately type realsense-viewer into the terminal and see the viewer
 
 #next clone librealsense library
@@ -39,9 +39,9 @@ mkdir build && cd build
 
 cmake .. -DBUILD_EXAMPLES=false -DBUILD_GRAPHICAL_EXAMPLES=false -DBUILD_WITH_OPENMP=false -DHWM_OVER_XU=false -DBUILD_PYTHON_BINDINGS=true -G Unix\ Makefiles -DPYTHON_EXECUTABLE=/Users/ranyoha/anaconda3/bin/python 
 
-#when you run make you need to specify the library path (as shown below) or else you may get an error saying lusb-1.0 is not found. brew install puts libraries into /usr/local/lib (for me)
+#when you run make you need to specify the library path (as shown below) or else you may get an error saying lusb-1.0 is not found. brew install puts libraries into /usr/local/lib (for me) or /usr/local/Cellar (for many others)
 
-make LIBRARY_PATH=/usr/local/lib
+make LIBRARY_PATH=/usr/local/Cellar
 
 make install
 
