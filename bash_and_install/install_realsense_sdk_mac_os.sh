@@ -49,7 +49,7 @@ make install
 
 #python
 
-#>>>sys.path.append('/usr/local/lib')
+#>>>sys.path.append('/usr/local/Cellar')
 
 #>>>import pyrealsense2 as rs
 
